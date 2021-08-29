@@ -1,0 +1,31 @@
+For deployment, I first created the python script with flask for testing it on colab with ngrok.
+The api request should be in the form:-
+{
+  'model': 'MODEL_TYPE', 
+  'modelfile': 'MODEL_FILE_NAME', 
+  'text': 'TEXT', 
+  'aspect': 'ASPECT'
+}
+For example, inferencing for an logistic regression model with modelfile value should be
+{
+  'model': 'lr', 
+  'modelfile': '', 
+  'text': 'text for inferencing sentence', 
+  'aspect': 'text for aspect terms'
+}
+The resulting output received should be of the form:-
+{
+  "sentiment":0
+}
+After testing the api on postman with the help of ngrok on colab notebook, the AWS instance was created and the files were uploaded using WinSCP.
+Then putty was used to connect to the instance with the private key. The necessary libraries were installed and the api script was run.
+The instance id for deployment is given by:-
+ec2-3-109-208-2.ap-south-1.compute.amazonaws.com
+with port 8080 for accepting requests.
+The server is made using waitress.
+An example of api url is given by:
+http://ec2-3-109-208-2.ap-south-1.compute.amazonaws.com:8080/predict?model=svc&modelname=&text=hey%20marilyn%20thanks%20for%20your%20answer%20the%20soc2%20type%201%20certification%20is%20a%20document%20that%20can%20be%20shared%20with%20external%20parties%20for%20security%20assessment%20do%20you%20have%20a%20copy%20of%20the%20report%20we%20could%20explore?&aspect=Security
+which gives result 
+{
+  "sentiment":1
+}
